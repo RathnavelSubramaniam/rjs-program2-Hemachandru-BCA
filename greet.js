@@ -1,7 +1,7 @@
 // Write a function that returns a message using template literals.
 
 function getMessage(name, age) {
-    // Write your code here
+    console.log(`Hello ${name}, Your age is ${age}.`);    
 }
 
 // Don't change the code below
