@@ -1,8 +1,9 @@
-const getMessage = require("./greet");
+const fs = require("fs");
 
-if (getMessage("Alice", 20) === "Hello Alice, you are 20 years old.") {
-    console.log("Test Passed");
-} else {
-    console.log("Test Failed");
-    process.exit(1);
-}
+test("✅ uses the required template literal", () => {
+  const code = fs.readFileSync("greet.js", "utf8");
+
+  expect(code).toMatch(
+    /return\s*`Hello \$\{name\}, Your age is \$\{age\}\.`;/
+  );
+});
