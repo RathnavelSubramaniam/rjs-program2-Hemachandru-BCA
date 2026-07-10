@@ -1,33 +1,24 @@
-name: Autograding Tests
-'on':
-- push
-- repository_dispatch
-permissions:
-  checks: write
-  actions: read
-  contents: read
+name: Autograding
+
+on:
+  push:
+  pull_request:
+
 jobs:
-  run-autograding-tests:
+  grade:
     runs-on: ubuntu-latest
-    if: github.actor != 'github-classroom[bot]'
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: testtemplate
-      id: testtemplate
-      uses: classroom-resources/autograding-io-grader@v1
-      with:
-        test-name: testtemplate
-        setup-command: ''
-        command: node greet.js
-        input: alice, 25
-        expected-output: Hello Alice, you are 20 years old.
-        comparison-method: contains
-        timeout: 10
-        max-score: 10
-    - name: Autograding Reporter
-      uses: classroom-resources/autograding-grading-reporter@v1
-      env:
-        TESTTEMPLATE_RESULTS: "${{steps.testtemplate.outputs.result}}"
-      with:
-        runners: testtemplate
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
