@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  autograding:
+  AutoGrading:
     runs-on: ubuntu-latest
 
     steps:
