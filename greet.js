@@ -8,3 +8,4 @@ function getMessage(name, age) {
 console.log(getMessage(process.argv[2], process.argv[3]));
 
 module.exports = getMessage;
+
